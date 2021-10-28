@@ -1,0 +1,24 @@
+{
+  "name": "joeTableModal",
+  "version": "1.0.0",
+  "description": "joeTableModal",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "serv": "node ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pancho1337/joeTableModal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pancho1337/joeTableModal/issues"
+  },
+  "homepage": "https://github.com/pancho1337/joeTableModal#readme"
+}
