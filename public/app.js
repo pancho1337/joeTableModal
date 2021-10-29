@@ -1,12 +1,25 @@
-var Modale = function () {
-  return (
-    <div>
-      <h2>
-        This will be were thing you have issues it will also take its state from
-        the app parent
-      </h2>
-    </div>
-  );
+var Modale = function (props) {
+  if (props.numClick) {
+    return (
+      <div className="modal">
+        <div className="overlay" onClick = {(e)=>{props.overlayClick(e)}}></div>
+        <div className="modal_content">
+          <h2>Hey Awesome Modal!</h2>
+          <p>
+            {props.numClick.caseID}
+          </p>
+          <p>
+            {props.numClick.caseStatus}
+          </p>
+          <button title="Close" className="close_modal">
+            <i className="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    );
+  } else {
+    return <div />;
+  }
 };
 var Searches = function () {
   return (
@@ -17,8 +30,14 @@ var Searches = function () {
 };
 var TableRow = function (props) {
   return (
-    <tr >
-      <td onClick={(e)=>{props.caseClick(e, props.caseObj)}}>{props.caseObj.caseID}</td>
+    <tr>
+      <td
+        onClick={(e) => {
+          props.caseClick(e, props.caseObj);
+        }}
+      >
+        {props.caseObj.caseID}
+      </td>
       <td>{props.caseObj.caseStatus}</td>
     </tr>
   );
@@ -29,13 +48,17 @@ var Table = function (props) {
   return (
     <div>
       <table>
-        <tr>
-          <th>CaseID</th>
-          <th>Case Status</th>
-        </tr>
-        {props.cases.map((obj) => {
-          return <TableRow caseObj={obj} caseClick ={props.caseClick}/>;
-        })}
+        <tbody>
+          <tr>
+            <th>CaseID</th>
+            <th>Case Status</th>
+          </tr>
+          {props.cases.map((obj, index) => {
+            return (
+              <TableRow key={index} caseObj={obj} caseClick={props.caseClick} />
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
@@ -46,15 +69,26 @@ class App extends React.Component {
     super(props);
     this.state = {
       cases: [],
-      numClick:null,
+      numClick: null,
     };
-    this.caseClick=this.caseClick.bind(this)
+    this.caseClick = this.caseClick.bind(this);
+    this.overlayClick = this.overlayClick.bind(this);
   }
-  caseClick(e , obj) {
-    e.preventDefault()
-    console.log("someone clicked a case",obj)
-  }
+  caseClick(e, obj) {
+    e.preventDefault();
+    console.log("someone clicked a case", obj);
+    this.setState({
+      numClick: obj
+    })
 
+  }
+  overlayClick(e){
+    e.preventDefault();
+    console.log("I am empty space")
+    this.setState({
+      numClick: null
+    })
+  };
   componentDidMount(prevProps) {
     console.log("this is", prevProps);
     fetch("/cases")
@@ -80,7 +114,7 @@ class App extends React.Component {
         </h2>
         <Searches />
         <Table cases={this.state.cases} caseClick={this.caseClick} />
-        <Modale />
+        <Modale numClick={this.state.numClick} overlayClick={this.overlayClick}/>
       </div>
     );
   }
