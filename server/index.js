@@ -11,7 +11,8 @@ const port = 3000
 var tempData = [
   {caseID: 1336, caseStatus: "Pending"},
   {caseID: 2020, caseStatus: "Cooking"},
-  {caseID: 3001, caseStatus: "Done"}
+  {caseID: 3001, caseStatus: "Done"},
+  {caseID:10, caseStatus: "not avail"}
 ]
 //this is middleware(this will convert json into javascript)
 app.use(express.json())
