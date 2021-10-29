@@ -13,7 +13,9 @@ var tempData = [
   {caseID: 2020, caseStatus: "Cooking"},
   {caseID: 3001, caseStatus: "Done"}
 ]
+//this is middleware(this will convert json into javascript)
 app.use(express.json())
+//this is middleware (this is creating a path directory to the public folder) 
 app.use('/', express.static(path.join(__dirname, '../public')))
 
 app.get('/cases', (req, res) =>{
@@ -23,7 +25,7 @@ app.get('/cases', (req, res) =>{
 app.get('/clients', (req, res) => {
   res.send('This is going to be a list of clients')
 })
-
+//from line number one number twenty nine you are building the whole menu,on line number 29 you are opening the restaurant.
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
