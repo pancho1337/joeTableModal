@@ -8,7 +8,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "serv": "node ./server"
+    "serv": "node ./server",
+    "mon": "nodemon ./server"
   },
   "repository": {
     "type": "git",
