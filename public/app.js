@@ -2,15 +2,16 @@ var Modale = function (props) {
   if (props.numClick) {
     return (
       <div className="modal">
-        <div className="overlay" onClick = {(e)=>{props.overlayClick(e)}}></div>
+        <div
+          className="overlay"
+          onClick={(e) => {
+            props.overlayClick(e);
+          }}
+        ></div>
         <div className="modal_content">
           <h2>Hey Awesome Modal!</h2>
-          <p>
-            {props.numClick.caseID}
-          </p>
-          <p>
-            {props.numClick.caseStatus}
-          </p>
+          <p>{props.numClick.caseID}</p>
+          <p>{props.numClick.caseStatus}</p>
           <button title="Close" className="close_modal">
             <i className="fas fa-times"></i>
           </button>
@@ -21,10 +22,15 @@ var Modale = function (props) {
     return <div />;
   }
 };
-var Searches = function () {
+var Searches = function (props) {
   return (
-    <div>
-      <h2>Theres going to be some inputs here</h2>
+    <div className="dropdown">
+      <button className="dropbtn">Case Status</button>
+      <div className="dropdown-content">
+        <a onClick={ (e)=>{props.caseFiter(e, "Active")}}>Active</a>
+        <a onClick={ (e)=>{props.caseFiter(e, "Pending")}}>Pending</a>
+        <a onClick={ (e)=>{props.caseFiter(e, "Resolved")}}>Resolved</a>
+      </div>
     </div>
   );
 };
@@ -68,34 +74,44 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      allCases: [],
       cases: [],
       numClick: null,
     };
     this.caseClick = this.caseClick.bind(this);
     this.overlayClick = this.overlayClick.bind(this);
+    this.caseFilter=this.caseFilter.bind(this);
   }
   caseClick(e, obj) {
     e.preventDefault();
     console.log("someone clicked a case", obj);
     this.setState({
-      numClick: obj
-    })
-
+      numClick: obj,
+    });
   }
-  overlayClick(e){
+  overlayClick(e) {
     e.preventDefault();
-    console.log("I am empty space")
+    console.log("I am empty space");
     this.setState({
-      numClick: null
+      numClick: null,
+    });
+  }
+  caseFilter(e, status){
+    e.preventDefault()
+    console.log('We are running this caseFilter')
+    var newArray = this.state.allCases.filter(elem=>elem.caseStatus === status)
+    this.setState({
+      cases: newArray
     })
   };
   componentDidMount(prevProps) {
-    console.log("this is", prevProps);
+    console.log("this is previous props", prevProps);
     fetch("/cases")
       .then((response) => response.json())
       .then((data) => {
         this.setState(
           {
+            allCases: data,
             cases: data,
           },
           () => {
@@ -112,9 +128,12 @@ class App extends React.Component {
         <h2>
           State. only have 2 things to reduce complexity caseID and caseStatus
         </h2>
-        <Searches />
+        <Searches caseFiter={this.caseFilter} />
         <Table cases={this.state.cases} caseClick={this.caseClick} />
-        <Modale numClick={this.state.numClick} overlayClick={this.overlayClick}/>
+        <Modale
+          numClick={this.state.numClick}
+          overlayClick={this.overlayClick}
+        />
       </div>
     );
   }
