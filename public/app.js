@@ -22,18 +22,121 @@ var Modale = function (props) {
     return <div />;
   }
 };
-var Searches = function (props) {
-  return (
-    <div className="dropdown">
-      <button className="dropbtn">Case Status</button>
-      <div className="dropdown-content">
-        <a onClick={ (e)=>{props.caseFiter(e, "Active")}}>Active</a>
-        <a onClick={ (e)=>{props.caseFiter(e, "Pending")}}>Pending</a>
-        <a onClick={ (e)=>{props.caseFiter(e, "Resolved")}}>Resolved</a>
+class Searches extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      caseStatus: null,
+      priority: null,
+      assignedTo: null,
+      caseType: null,
+      dueDate: null,
+      arrSelection: [],
+    };
+    this.caseSelector = this.caseSelector.bind(this);
+  }
+  clearFilter(e){
+    e.preventDefault()
+    this.setState({
+      caseStatus: null,
+      priority: null,
+      assignedTo: null,
+      caseType: null,
+      dueDate: null
+    },()=>{
+      console.log("We ran the clear filter",this.state)
+    })
+  }
+  caseSelector(e, status) {
+    e.preventDefault();
+    console.log("this is the event", e);
+    this.setState(
+      {
+        [e.target.id]: e.target.value,
+      },
+      () => {
+        console.log("this is the state of the search", this.state);
+      }
+    );
+  }
+  render() {
+    return (
+      <div>
+        <form>
+          <label>Case Status:</label>
+          <select
+            onChange={(e) => {
+              this.caseSelector(e, "Active");
+            }}
+            name="caseStatus"
+            id="caseStatus"
+          >
+            <option value="">No Selection</option>
+            <option value="Active">Active</option>
+            <option value="Pending">Pending</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+          <label>Case Priority:</label>
+          <select
+            onChange={(e) => {
+              this.caseSelector(e, "Active");
+            }}
+            name="priority"
+            id="priority"
+          >
+            <option value="">No Selection</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+          <label>Assigned To:</label>
+          <select
+            onChange={(e) => {
+              this.caseSelector(e, "Active");
+            }}
+            name="assignedTo"
+            id="assignedTo"
+          >
+            <option value="">No Selection</option>
+            <option value="pete">Pete</option>
+            <option value="pancho">Pancho</option>
+            <option value="tom">Tom</option>
+          </select>
+          <label>Case Type:</label>
+          <select
+            onChange={(e) => {
+              this.caseSelector(e, "Active");
+            }}
+            name="caseType"
+            id="caseType"
+          >
+            <option value="">No Selection</option>
+            <option value="it">IT</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="repair">Repair</option>
+          </select>
+          <label>Due Date:</label>
+          <select
+            onChange={(e) => {
+              this.caseSelector(e, "Active");
+            }}
+            name="dueDate"
+            id="dueDate"
+          >
+            <option value="">No Selection</option>
+            <option value="oneWeek">1 Week</option>
+            <option value="oneMonth">1 Month</option>
+            <option value="twoMonths">2 Months</option>
+          </select>
+          <br></br>
+          <input type="submit" value="Apply Filter" />
+        </form>
+        <button onClick={(e)=>{this.clearFilter(e)}}>Clear Filter</button>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
+
 var TableRow = function (props) {
   return (
     <tr>
@@ -80,7 +183,7 @@ class App extends React.Component {
     };
     this.caseClick = this.caseClick.bind(this);
     this.overlayClick = this.overlayClick.bind(this);
-    this.caseFilter=this.caseFilter.bind(this);
+    this.caseFilter = this.caseFilter.bind(this);
   }
   caseClick(e, obj) {
     e.preventDefault();
@@ -96,14 +199,16 @@ class App extends React.Component {
       numClick: null,
     });
   }
-  caseFilter(e, status){
-    e.preventDefault()
-    console.log('We are running this caseFilter')
-    var newArray = this.state.allCases.filter(elem=>elem.caseStatus === status)
+  caseFilter(e, status) {
+    e.preventDefault();
+    console.log("We are running this caseFilter");
+    var newArray = this.state.allCases.filter(
+      (elem) => elem.caseStatus === status
+    );
     this.setState({
-      cases: newArray
-    })
-  };
+      cases: newArray,
+    });
+  }
   componentDidMount(prevProps) {
     console.log("this is previous props", prevProps);
     fetch("/cases")
