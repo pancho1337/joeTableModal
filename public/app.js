@@ -37,8 +37,8 @@ class App extends React.Component {
     // var searchArr = Object.values(cstate).filter(word => word !== null)
     var newArray = [...this.state.allCases];
     for (const key in cstate) {
-      if (cstate[key] !== null) {
-              console.log(key,newArray)
+      if (cstate[key] !== "") {
+        console.log(newArray,cstate[key])
         newArray = newArray.filter((elem) => elem[key] === cstate[key]);
       }
     }    

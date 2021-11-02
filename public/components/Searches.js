@@ -3,22 +3,22 @@ class Searches extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        caseStatus: null,
-        priority: null,
-        assignedTo: null,
-        caseType: null,
-        dueDate: null
+        caseStatus: "",
+        priority: "",
+        assignedTo: "",
+        caseType: "",
+        dueDate: ""
       };
       this.caseSelector = this.caseSelector.bind(this);
     }
     clearFilter(e){
       e.preventDefault()
       this.setState({
-        caseStatus: null,
-        priority: null,
-        assignedTo: null,
-        caseType: null,
-        dueDate: null
+        caseStatus: "",
+        priority: "",
+        assignedTo: "",
+        caseType: "",
+        dueDate: ""
       },()=>{
         console.log("We ran the clear filter",this.state)
         this.props.clearMaster()
@@ -50,6 +50,8 @@ class Searches extends React.Component {
               }}
               name="caseStatus"
               id="caseStatus"
+              value = {this.state.caseStatus}
+              //selected = {this.state.caseStatus}
             >
               <option value="">No Selection</option>
               <option value="Active">Active</option>
@@ -63,6 +65,7 @@ class Searches extends React.Component {
               }}
               name="priority"
               id="priority"
+              value = {this.state.priority}
             >
               <option value="">No Selection</option>
               <option value="Low">Low</option>
@@ -76,6 +79,7 @@ class Searches extends React.Component {
               }}
               name="assignedTo"
               id="assignedTo"
+              value = {this.state.assignedTo}
             >
               <option value="">No Selection</option>
               <option value="Pete">Pete</option>
@@ -89,6 +93,7 @@ class Searches extends React.Component {
               }}
               name="caseType"
               id="caseType"
+              value = {this.state.caseType}
             >
               <option value="">No Selection</option>
               <option value="it">IT</option>
@@ -102,6 +107,7 @@ class Searches extends React.Component {
               }}
               name="dueDate"
               id="dueDate"
+              value = {this.state.dueDate}
             >
               <option value="">No Selection</option>
               <option value="oneWeek">1 Week</option>
