@@ -1,3 +1,4 @@
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +12,7 @@ class App extends React.Component {
     this.overlayClick = this.overlayClick.bind(this);
     this.caseFilter = this.caseFilter.bind(this);
     this.clearMaster = this.clearMaster.bind(this);
+    this.miniSearch = this.miniSearch.bind(this);
   }
   caseClick(e, obj) {
     e.preventDefault();
@@ -24,7 +26,7 @@ class App extends React.Component {
     e.preventDefault();
     console.log("I am empty space");
     this.setState({
-      numClick: null,
+      numClick: null
     });
   }
   clearMaster(){
@@ -65,15 +67,36 @@ class App extends React.Component {
         );
       });
   }
+  miniSearch(e){
+    e.preventDefault()
+    var miniResults = [];
+    console.log("this is the event",e.target.search.value)
+    for(var i=0;i<this.state.allCases.length;i++){
+      for (var key in this.state.allCases[i]){
+        if (this.state.allCases[i][key] === e.target.search.value){
+          miniResults.push(this.state.allCases[i])
+        }
+      }
+    }
+    this.setState({
+      cases:miniResults
+    })
+  }
   render() {
     console.log("this is the state", this.state);
     return (
       <div>
-        <h3>Arrrggghhh... Give me Tacos...</h3>
-        <h2>
-          State. only have 2 things to reduce complexity caseID and caseStatus
-        </h2>
+        {/* 
+        future plans organize by column*/}
+        <h2>Case list</h2>
         <Searches clearMaster={this.clearMaster} trigger={this.state.trigger} caseFilter={this.caseFilter} />
+        <br/><br/><br/>
+        <form id="miniSearch" onSubmit={(e)=>{this.miniSearch(e)}}>
+          <input type="text" placeholder="Search.." name="search"/>
+          <button type="submit"><i className="fa fa-search"></i></button>
+        </form>
+        <br/>
+        <br/>
         <Table cases={this.state.cases} caseClick={this.caseClick} />
         <Modale
           numClick={this.state.numClick}

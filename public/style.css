@@ -102,3 +102,29 @@
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  label{
+    font-weight: bolder;
+  }
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .box div {
+    width: 100px;
+    height: 100px;
+  }
+  input{
+    margin-left: 100px;
+  }
+  table, th, td {
+    border:1px solid black;
+  } 
+  table{
+    width: 840px;
+  }
+  #miniSearch{
+    position:absolute; right: 80px; 
+  }

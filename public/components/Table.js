@@ -9,6 +9,10 @@ var Table = function (props) {
             <tr>
               <th>CaseID</th>
               <th>Case Status</th>
+              <th>Case Priority</th>
+              <th>Assigned To</th>
+              <th>Due Date</th>
+              <th>Case Type</th>
             </tr>
             {props.cases.map((obj, index) => {
               return (

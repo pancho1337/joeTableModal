@@ -38,9 +38,8 @@ class Searches extends React.Component {
     }
     render() {
       return (
-        <div>
-          <h1>{this.props.trigger}</h1>
-          <form onSubmit={(e)=>{
+      <div className= "box">
+        <form onSubmit={(e)=>{
             this.props.caseFilter(e,this.state)
           }}>
             <label>Case Status:</label>
@@ -58,7 +57,7 @@ class Searches extends React.Component {
               <option value="Pending">Pending</option>
               <option value="Resolved">Resolved</option>
             </select>
-            <label>Case Priority:</label>
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Case Priority:</label>
             <select
               onChange={(e) => {
                 this.caseSelector(e);
@@ -72,6 +71,7 @@ class Searches extends React.Component {
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
+            <br/>
             <label>Assigned To:</label>
             <select
               onChange={(e) => {
@@ -86,7 +86,7 @@ class Searches extends React.Component {
               <option value="Pancho">Pancho</option>
               <option value="Tom">Tom</option>
             </select>
-            <label>Case Type:</label>
+            <label>&nbsp;&nbsp;&nbsp;Case Type:</label>
             <select
               onChange={(e) => {
                 this.caseSelector(e);
@@ -100,6 +100,7 @@ class Searches extends React.Component {
               <option value="maintenance">Maintenance</option>
               <option value="repair">Repair</option>
             </select>
+            <br/>
             <label>Due Date:</label>
             <select
               onChange={(e) => {
@@ -115,9 +116,10 @@ class Searches extends React.Component {
               <option value="twoMonths">2 Months</option>
             </select>
             <br></br>
+            <br></br>
             <input type="submit" value="Apply Filter" />
+            <button onClick={(e)=>{this.clearFilter(e)}}>Clear Filter</button>
           </form>
-          <button onClick={(e)=>{this.clearFilter(e)}}>Clear Filter</button>
         </div>
       );
     }
