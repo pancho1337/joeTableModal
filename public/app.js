@@ -14,6 +14,7 @@ class App extends React.Component {
     this.clearMaster = this.clearMaster.bind(this);
     this.miniSearch = this.miniSearch.bind(this);
     this.columnOrg = this.columnOrg.bind(this);
+    this.pushCaseSomething = this.pushCaseSomething.bind(this);
   }
   caseClick(e, obj) {
     e.preventDefault();
@@ -109,6 +110,25 @@ this.setState({
 })
 console.log("somebody clicked on the parent")
 }
+pushCaseSomething(e,data){
+  e.preventDefault()
+  console.log("pushCaseSomething being invoked",data)
+fetch("/addCase", {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+
+}
 
   render() {
     console.log("this is the state", this.state);
@@ -120,6 +140,9 @@ console.log("somebody clicked on the parent")
         use sort reorganize from high to low
         set the new state to be this array
         */}
+        <h2>Insert Case</h2>
+        <InsertForm pushCaseSomething ={this.pushCaseSomething}/>
+        <br/><br/><br/>
         <h2>Case list</h2>
         <Searches clearMaster={this.clearMaster} trigger={this.state.trigger} caseFilter={this.caseFilter} />
         <br/><br/><br/>
