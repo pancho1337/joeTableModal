@@ -96,9 +96,9 @@ class Searches extends React.Component {
               value = {this.state.caseType}
             >
               <option value="">No Selection</option>
-              <option value="it">IT</option>
-              <option value="maintenance">Maintenance</option>
-              <option value="repair">Repair</option>
+              <option value="IT">IT</option>
+              <option value="Maintenance">Maintenance</option>
+              <option value="Repair">Repair</option>
             </select>
             <br/>
             <label>Due Date:</label>
@@ -111,9 +111,9 @@ class Searches extends React.Component {
               value = {this.state.dueDate}
             >
               <option value="">No Selection</option>
-              <option value="oneWeek">1 Week</option>
-              <option value="oneMonth">1 Month</option>
-              <option value="twoMonths">2 Months</option>
+              <option value="One_Week">1 Week</option>
+              <option value="One_Month">1 Month</option>
+              <option value="Two_Months">2 Months</option>
             </select>
             <br></br>
             <br></br>

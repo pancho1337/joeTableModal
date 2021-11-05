@@ -13,6 +13,7 @@ class App extends React.Component {
     this.caseFilter = this.caseFilter.bind(this);
     this.clearMaster = this.clearMaster.bind(this);
     this.miniSearch = this.miniSearch.bind(this);
+    this.columnOrg = this.columnOrg.bind(this);
   }
   caseClick(e, obj) {
     e.preventDefault();
@@ -82,12 +83,43 @@ class App extends React.Component {
       cases:miniResults
     })
   }
+columnOrg(e,pName){
+e.preventDefault()
+console.log("this is the property name",pName)
+var sortResults = [...this.state.allCases]
+sortResults.sort((a,b)=>{
+  if(typeof a[pName]=== "number"){
+    return a[pName] - b[pName];
+  }else{
+    var nameA = a[pName].toUpperCase(); // ignore upper and lowercase
+    var nameB = b[pName].toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  }
+
+})
+console.log("I am the results", sortResults)
+this.setState({
+  cases: sortResults
+})
+console.log("somebody clicked on the parent")
+}
+
   render() {
     console.log("this is the state", this.state);
     return (
       <div>
         {/* 
-        future plans organize by column*/}
+        future plans organize by column 
+        In order to organize the column organize from low to high or vice versa
+        use sort reorganize from high to low
+        set the new state to be this array
+        */}
         <h2>Case list</h2>
         <Searches clearMaster={this.clearMaster} trigger={this.state.trigger} caseFilter={this.caseFilter} />
         <br/><br/><br/>
@@ -97,7 +129,7 @@ class App extends React.Component {
         </form>
         <br/>
         <br/>
-        <Table cases={this.state.cases} caseClick={this.caseClick} />
+        <Table columnOrg={this.columnOrg} cases={this.state.cases} caseClick={this.caseClick} />
         <Modale
           numClick={this.state.numClick}
           overlayClick={this.overlayClick}

@@ -14,37 +14,37 @@ var tempData = [
     caseStatus: "Pending",
     priority: "Low",
     assignedTo: "Pancho",
-    caseType: "repair",
-    dueDate: "oneMonth",
+    caseType: "Repair",
+    dueDate: "One Month",
   },
   {
     caseID: 36326,
     caseStatus: "Resolved",
     priority: "Medium",
     assignedTo: "Pete",
-    caseType: "maintenance",
-    dueDate: "oneWeek",
+    caseType: "Maintenance",
+    dueDate: "One Week",
   },  {
     caseID: 54354,
     caseStatus: "Resolved",
     priority: "Low",
     assignedTo: "Tom",
-    caseType: "it",
-    dueDate: "oneMonth",
+    caseType: "IT",
+    dueDate: "One Month",
   },  {
     caseID: 135436,
     caseStatus: "Active",
     priority: "Low",
     assignedTo: "Pete",
-    caseType: "maintenance",
-    dueDate: "oneMonth",
+    caseType: "Maintenance",
+    dueDate: "One Month",
   },  {
     caseID: 13326,
     caseStatus: "Pending",
     priority: "Medium",
     assignedTo: "Tom",
-    caseType: "repair",
-    dueDate: "oneMonth",
+    caseType: "Repair",
+    dueDate: "Two Monts",
   }
 ];
 //this is middleware(this will convert json into javascript)
@@ -58,6 +58,18 @@ app.get("/cases", (req, res) => {
 
 app.get("/clients", (req, res) => {
   res.send("This is going to be a list of clients");
+});
+app.post("/addCase",(req, res)=>{
+  var obj={
+    caseID: 999999,
+    caseStatus: "Active",
+    priority: "High",
+    assignedTo: "Joe",
+    caseType: "Repair",
+    dueDate: "Two Months"
+  }
+  tempData.push()
+  res.send("You posted to the DB")
 });
 //from line number one number twenty nine you are building the whole menu,on line number 29 you are opening the restaurant.
 app.listen(port, () => {

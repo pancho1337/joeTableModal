@@ -7,12 +7,12 @@ var Table = function (props) {
         <table>
           <tbody>
             <tr>
-              <th>CaseID</th>
-              <th>Case Status</th>
-              <th>Case Priority</th>
-              <th>Assigned To</th>
-              <th>Due Date</th>
-              <th>Case Type</th>
+              <th onClick = {(e)=>{props.columnOrg(e,"caseID")}}>Case ID</th>
+              <th onClick = {(e)=>{props.columnOrg(e,"caseStatus")}}>Case Status</th>
+              <th onClick = {(e)=>{props.columnOrg(e,"priority")}}>Case Priority</th>
+              <th onClick = {(e)=>{props.columnOrg(e,"assignedTo")}}>Assigned To</th>
+              <th onClick = {(e)=>{props.columnOrg(e,"dueDaate")}}>Due Date</th>
+              <th onClick = {(e)=>{props.columnOrg(e,"caseType")}}>Case Type</th>
             </tr>
             {props.cases.map((obj, index) => {
               return (
